@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SortSmart | Recycle Smarter</title>
+
+<style>
+:root {
+  --green: #176b45;
+  --dark: #123c2c;
+  --light: #eaf5ec;
+  --lime: #b9dc85;
+  --text: #20352b;
+  --muted: #5d7065;
+  --border: #d5e5d8;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6faf6;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+header {
+  background: var(--dark);
+  color: white;
+  padding: 22px 7%;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.brand span {
+  color: var(--lime);
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  background: transparent;
+  color: white;
+  border: 1px solid #638674;
+  border-radius: 22px;
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: .92rem;
+}
+
+nav button:hover,
+nav button.active {
+  background: var(--lime);
+  color: var(--dark);
+  border-color: var(--lime);
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 6%;
+}
+
+.page {
+  display: none;
+  animation: appear .25s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: .5; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+  background: linear-gradient(130deg, #dff1e2, #f0f8e8);
+  border-radius: 25px;
+  padding: 50px 8%;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: .8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  color: var(--dark);
+}
+
+h1 {
+  font-size: clamp(2.3rem, 6vw, 4.1rem);
+  max-width: 750px;
+  margin: 12px 0;
+  letter-spacing: -2px;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-top: 30px;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  color: #43594b;
+}
+
+.hero p {
+  max-width: 720px;
+  font-size: 1.1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 19px;
+  margin: 8px 8px 0 0;
+  border-radius: 10px;
+  border: none;
+  background: var(--green);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: .95rem;
+}
+
+.button:hover {
+  background: var(--dark);
+}
+
+.button.secondary {
+  background: white;
+  color: var(--green);
+  border: 1px solid var(--border);
+}
+
+.section-intro {
+  max-width: 800px;
+  margin-bottom: 26px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 18px;
+  margin: 25px 0;
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  box-shadow: 0 5px 18px #153e2a08;
+  min-width: 0;
+}
+
+.card h3 {
+  margin-top: 7px;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+.symbol {
+  font-size: 2rem;
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: .8rem;
+  font-weight: bold;
+  background: var(--light);
+  color: var(--green);
+}
+
+.notice, .good {
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 22px 0;
+}
+
+.notice {
+  background: #fff7dd;
+  border-left: 5px solid #d9ad42;
+}
+
+.good {
+  background: var(--light);
+  border-left: 5px solid var(--green);
+}
+
+.steps .step {
+  display: flex;
+  gap: 16px;
+  background: white;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 13px 0;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  font-weight: bold;
+}
+
+.step h3 {
+  margin: 2px 0 5px;
+}
+
+.step p {
+  margin: 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 16px 0 6px;
+}
+
+input, select {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px;
+  border: 1px solid #b9cdbd;
+  border-radius: 9px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+input:focus, select:focus, button:focus, a:focus {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.resource-link {
+  display: block;
+  padding: 15px 17px;
+  margin: 12px 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--green);
+  text-decoration: none;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.resource-link:hover {
+  background: var(--light);
+  border-color: var(--green);
+}
+
+.resource-link span {
+  display: block;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+.plastic-code {
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: var(--green);
+  background: var(--light);
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.quiz-question {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 22px;
+  margin: 18px 0;
+}
+
+.quiz-question h3 {
+  margin-top: 0;
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px 15px;
+  margin: 9px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfdfb;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.quiz-option:hover:not(:disabled) {
+  background: var(--light);
+  border-color: var(--green);
+}
+
+.quiz-option:disabled {
+  cursor: default;
+  opacity: .9;
+}
+
+.quiz-option.correct {
+  background: #dff4df;
+  border-color: #31824d;
+}
+
+.quiz-option.incorrect {
+  background: #ffebdf;
+  border-color: #bd6842;
+}
+
+.feedback {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+#quiz-result {
+  display: none;
+  background: var(--light);
+  border-radius: 15px;
+  padding: 24px;
+  margin: 22px 0;
+}
+
+footer {
+  background: var(--dark);
+  color: #e4f2e7;
+  padding: 30px 7%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer p {
+  color: #e4f2e7;
+}
+
+footer a {
+  color: var(--lime);
+}
+
+.small {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+@media (max-width: 650px) {
+  header { padding: 18px 5%; }
+  main { padding: 20px 5%; }
+  .hero { padding: 32px 7%; }
+  nav button { padding: 8px 11px; }
+  .card { padding: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">♻ Sort<span>Smart</span></div>
+
+    <nav aria-label="Main navigation">
+      <button class="active" data-page="home">Home</button>
+      <button data-page="process">How to Recycle</button>
+      <button data-page="waste">Waste Guide</button>
+      <button data-page="plastics">Plastic Numbers</button>
+      <button data-page="local">Michigan Rules</button>
+      <button data-page="challenge">County Challenge</button>
+      <button data-page="quiz">Take the Quiz</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section class="page active" id="home">
+  <div class="hero">
+    <div class="eyebrow">Small choices. Smarter communities.</div>
+    <h1>Know your waste. Make a difference.</h1>
+    <p>
+      Recycling can feel confusing when different materials have
+      different rules. SortSmart explains how recycling works,
+      how to prepare everyday items, what plastic numbers mean,
+      and where to find recycling guidelines for Michigan counties.
+    </p>
+    <button class="button" data-go="waste">Explore Waste Types</button>
+    <button class="button secondary" data-go="local">Find County Rules</button>
+  </div>
+
+  <h2>Start with the basics</h2>
+  <p class="section-intro">
+    Identify what an item is made of, check whether your local program
+    accepts it, and prepare it correctly. Contamination happens when
+    unsuitable items, food, or liquids interfere with recycling.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="symbol">🔄</div>
+      <h3>Understand the process</h3>
+      <p>Learn how materials travel from your home through collection,
+      sorting, processing, and manufacturing.</p>
+      <button class="button" data-go="process">Learn the Steps</button>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🧴</div>
+      <h3>Identify your waste</h3>
+      <p>Explore rules for paper, plastic, glass, metal, electronics,
+      batteries, food scraps, and other common materials.</p>
+      <button class="button" data-go="waste">Explore Materials</button>
+    </article>
+
+    <article class="card">
+      <div class="symbol">♻️</div>
+      <h3>Understand plastic numbers</h3>
+      <p>Learn what resin codes #1 through #7 identify and why a
+      plastic number does not guarantee recyclability.</p>
+      <button class="button" data-go="plastics">Plastic Number Guide</button>
+    </article>
+
+    <article class="card">
+      <div class="symbol">📍</div>
+      <h3>Find Michigan county rules</h3>
+      <p>Select your county to find county-specific recycling searches
+      and links to Michigan's official recycling resources.</p>
+      <button class="button" data-go="local">Find County Rules</button>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🧠</div>
+      <h3>Practice your knowledge</h3>
+      <p>Answer sorting questions and get feedback to improve your
+      understanding of everyday recycling.</p>
+      <button class="button" data-go="quiz">Start the Quiz</button>
+    </article>
+  </div>
+
+  <div class="good">
+    <strong>Remember:</strong> Reduce and reuse before recycling
+    whenever practical. Preventing waste can save resources before
+    recycling is even needed.
+  </div>
+</section>
+
+<!-- RECYCLING PROCESS -->
+<section class="page" id="process">
+  <div class="eyebrow">From your home to a new product</div>
+  <h2>How Recycling Works</h2>
+  <p class="section-intro">
+    Recycling works as a chain of connected steps. An item must be
+    accepted, collected, sorted, processed, and sent to a facility
+    that can use the recovered material.
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div>
+        <h3>Identify the material</h3>
+        <p>Determine what the item is made from. A plastic bottle,
+        plastic bag, and foam container may require different
+        disposal methods.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div>
+        <h3>Check your local rules</h3>
+        <p>Review your county and community's recycling information.
+        Confirm whether an item is accepted curbside, at a drop-off
+        location, or through a special collection program.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div>
+        <h3>Prepare the item</h3>
+        <p>Empty containers, remove leftover food, and follow local
+        instructions for rinsing, lids, cardboard, and other materials.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div>
+        <h3>Collection and transportation</h3>
+        <p>Accepted materials are collected by a recycling service
+        or taken to a designated drop-off location.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div>
+        <h3>Sorting and processing</h3>
+        <p>Facilities separate materials using equipment and sometimes
+        manual sorting. Recovered materials are processed for
+        manufacturing.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">6</div>
+      <div>
+        <h3>Manufacturing and reuse</h3>
+        <p>Processed paper, metals, glass, and suitable plastics can
+        become raw materials for new products.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>Why contamination matters:</strong> Food residue, liquids,
+    plastic bags, hazardous waste, and unaccepted items can interfere
+    with sorting or reduce the quality of recovered materials.
+  </div>
+
+  <h2>Five habits for better recycling</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Check first</h3>
+      <p>Confirm that your recycling program accepts the specific item.</p>
+    </article>
+    <article class="card">
+      <h3>Empty containers</h3>
+      <p>Remove leftover food and liquid according to local instructions.</p>
+    </article>
+    <article class="card">
+      <h3>Keep items loose</h3>
+      <p>Keep recyclables loose unless your program specifies otherwise.</p>
+    </article>
+    <article class="card">
+      <h3>Protect special waste</h3>
+      <p>Use designated collection options for batteries, chemicals,
+      and electronics.</p>
+    </article>
+  </div>
+</section>
+
+<!-- WASTE GUIDE -->
+<section class="page" id="waste">
+  <div class="eyebrow">Know what goes where</div>
+  <h2>Waste Types and General Recycling Rules</h2>
+  <p class="section-intro">
+    These are general guidelines for handling everyday materials.
+    Recycling availability and preparation requirements vary by
+    community, so always confirm local instructions before using
+    a curbside bin or drop-off service.
+  </p>
+
+  <div class="good">
+    <strong>General rule:</strong> An item being made from a recyclable
+    material does not mean every recycling program accepts it.
+    Check the exact item, not just its material or symbol.
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="symbol">📄</div>
+      <span class="tag">Paper products</span>
+      <h3>Paper and Cardboard</h3>
+      <p><strong>General rule:</strong> Keep accepted paper clean and dry.
+      Flatten cardboard boxes if required.</p>
+      <p>Newspapers, office paper, and corrugated cardboard are commonly
+      recyclable. Greasy paper, heavily food-soiled cardboard, tissues,
+      and coated paper may not be accepted.</p>
+      <p><strong>Avoid:</strong> Mixing wet or greasy paper with clean
+      recyclables.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🧴</div>
+      <span class="tag">Plastic</span>
+      <h3>Plastic Containers</h3>
+      <p><strong>General rule:</strong> Check whether the specific rigid
+      plastic container is accepted. Empty it and follow local
+      instructions for lids.</p>
+      <p>Bottles, jugs, and tubs may be accepted. Plastic bags, film,
+      foam, toys, and mixed-material packaging often require different
+      disposal options.</p>
+      <p><strong>Avoid:</strong> Assuming the resin number guarantees
+      curbside acceptance.</p>
+      <button class="button" data-go="plastics">View Plastic Codes</button>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🍾</div>
+      <span class="tag">Glass</span>
+      <h3>Glass Bottles and Jars</h3>
+      <p><strong>General rule:</strong> Check whether container glass
+      is accepted curbside or through a dedicated drop-off site.</p>
+      <p>Empty beverage bottles and food jars may be accepted.
+      Drinking glasses, mirrors, window glass, ceramics, and
+      heat-resistant cookware generally do not belong with ordinary
+      container glass.</p>
+      <p><strong>Avoid:</strong> Mixing incompatible glass types.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🥫</div>
+      <span class="tag">Metal</span>
+      <h3>Aluminum and Steel Cans</h3>
+      <p><strong>General rule:</strong> Empty accepted food and beverage
+      cans. Follow local directions for lids and sharp edges.</p>
+      <p>Metal scrap, appliances, propane cylinders, and pressurized
+      containers may require special handling.</p>
+      <p><strong>Avoid:</strong> Placing pressurized or hazardous
+      containers in ordinary recycling bins.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🔌</div>
+      <span class="tag">Electronic waste</span>
+      <h3>Electronics</h3>
+      <p><strong>General rule:</strong> Use an electronics recycler,
+      manufacturer take-back program, or designated collection event.</p>
+      <p>Phones, computers, tablets, and cords can contain recoverable
+      materials. Before handing over a device, back up your files
+      and erase personal information as appropriate.</p>
+      <p><strong>Avoid:</strong> Putting electronics in ordinary
+      curbside bins unless explicitly accepted.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🍂</div>
+      <span class="tag">Organic material</span>
+      <h3>Food Scraps and Yard Waste</h3>
+      <p><strong>General rule:</strong> Check whether your community
+      offers composting, organics collection, or yard-waste pickup.</p>
+      <p>Leaves, grass, and suitable food scraps can be composted.
+      Meat, dairy, oils, pet waste, and compostable packaging depend
+      on the type of composting system.</p>
+      <p><strong>Avoid:</strong> Assuming all compostable packaging
+      belongs in a backyard compost pile.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🔋</div>
+      <span class="tag">Special collection</span>
+      <h3>Batteries and Light Bulbs</h3>
+      <p><strong>General rule:</strong> Follow battery-specific
+      collection instructions. Some batteries require terminal
+      protection to reduce fire risk.</p>
+      <p>Rechargeable batteries, lithium batteries, and fluorescent
+      lamps may need designated collection options.</p>
+      <p><strong>Avoid:</strong> Placing loose batteries in ordinary
+      recycling or trash without checking the appropriate guidance.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">👕</div>
+      <span class="tag">Reuse first</span>
+      <h3>Clothing and Textiles</h3>
+      <p><strong>General rule:</strong> Donate clean, usable clothing
+      or use a textile collection program that accepts your items.</p>
+      <p>Some organizations accept worn textiles for specialized
+      processing. Acceptance requirements vary.</p>
+      <p><strong>Avoid:</strong> Donating wet, moldy, or dirty items
+      to programs that cannot process them.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">⚠️</div>
+      <span class="tag">Handle carefully</span>
+      <h3>Household Hazardous Waste</h3>
+      <p><strong>General rule:</strong> Check local disposal guidance
+      for paints, solvents, pesticides, automotive fluids, and
+      other potentially hazardous products.</p>
+      <p>Keep products in their original labeled containers when safe
+      to do so. Contact the collection program before transporting
+      questionable materials.</p>
+      <p><strong>Avoid:</strong> Mixing unknown chemicals or pouring
+      them into drains, storm sewers, or onto the ground.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🥡</div>
+      <span class="tag">Check carefully</span>
+      <h3>Food Packaging and Cartons</h3>
+      <p><strong>General rule:</strong> Empty packaging and check the
+      rules for the exact package type.</p>
+      <p>Cartons, takeout containers, coated paper, and mixed-material
+      packages can be difficult to process. Food residue and
+      different layers may affect acceptance.</p>
+      <p><strong>Avoid:</strong> Assuming that all paper-looking or
+      plastic-looking packaging is recyclable.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🛍️</div>
+      <span class="tag">Usually separate</span>
+      <h3>Plastic Bags and Film</h3>
+      <p><strong>General rule:</strong> Keep plastic bags and film out
+      of curbside recycling unless your program explicitly accepts them.</p>
+      <p>Some grocery stores and specialized programs collect clean,
+      dry plastic film. Accepted bag and film types vary.</p>
+      <p><strong>Avoid:</strong> Putting bagged recyclables into a
+      curbside bin without checking local instructions.</p>
+    </article>
+
+    <article class="card">
+      <div class="symbol">🪑</div>
+      <span class="tag">Large items</span>
+      <h3>Furniture and Appliances</h3>
+      <p><strong>General rule:</strong> Consider donation, repair,
+      resale, bulk pickup, or a designated recycling facility.</p>
+      <p>Appliances may contain refrigerants or other components
+      that require special handling. Pickup and drop-off rules vary.</p>
+      <p><strong>Avoid:</strong> Leaving large items beside a
+      recycling bin without arranging proper collection.</p>
+    </article>
+  </div>
+
+  <h2>Quick rules to remember</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>1. Reduce and reuse</h3>
+      <p>Prevent waste and reuse usable products before recycling.</p>
+    </article>
+    <article class="card">
+      <h3>2. Keep recyclables clean</h3>
+      <p>Empty containers and follow the service's preparation rules.</p>
+    </article>
+    <article class="card">
+      <h3>3. Do not guess</h3>
+      <p>Check the exact material and item in the local guidelines.</p>
+    </article>
+    <article class="card">
+      <h3>4. Separate special waste</h3>
+      <p>Use the correct collection program for batteries,
+      chemicals, electronics, and other special items.</p>
+    </article>
+  </div>
+
+  <div class="good">
+    <strong>Need help finding a recycling facility?</strong>
+    <a href="https://www.michigan.gov/egle/about/organization/materials-management/recycling/michigan-recycling-directory"
+       target="_blank" rel="noopener noreferrer">
+      Search the Michigan Recycling Directory
+    </a>.
+  </div>
+</section>
+
+<!-- PLASTIC NUMBER GUIDE -->
+<section class="page" id="plastics">
+  <div class="eyebrow">Understand the numbers on plastic</div>
+  <h2>Plastic Recycling Numbers #1–#7</h2>
+
+  <p class="section-intro">
+    Many plastic products have a number inside a triangular symbol
+    made of chasing arrows. This is a resin identification code:
+    it identifies the main type of plastic used to make the item.
+    It does not guarantee that the item is recyclable or accepted
+    by your local recycling program.
+  </p>
+
+  <div class="notice">
+    <strong>Important:</strong> The number identifies the plastic
+    resin, not how many times an item has been recycled and not
+    whether your curbside service accepts it. Shape, additives,
+    color, contamination, local equipment, and available markets
+    can all affect recyclability.
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="plastic-code">#1</div>
+      <span class="tag">PET or PETE</span>
+      <h3>Polyethylene Terephthalate</h3>
+      <p><strong>Common items:</strong> Water and soda bottles,
+      some food jars, and clear beverage containers.</p>
+      <p><strong>General guidance:</strong> Many recycling programs
+      accept common PET beverage bottles. Empty them and follow
+      local directions for caps and labels.</p>
+      <p><strong>Remember:</strong> Not every PET tray, clamshell,
+      or other package is accepted.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#2</div>
+      <span class="tag">HDPE</span>
+      <h3>High-Density Polyethylene</h3>
+      <p><strong>Common items:</strong> Milk jugs, detergent bottles,
+      shampoo bottles, and some household-product containers.</p>
+      <p><strong>General guidance:</strong> Many programs accept
+      common HDPE bottles and jugs when emptied and prepared properly.</p>
+      <p><strong>Remember:</strong> Acceptance of other HDPE objects
+      and containers can differ.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#3</div>
+      <span class="tag">PVC or V</span>
+      <h3>Polyvinyl Chloride</h3>
+      <p><strong>Common items:</strong> Certain pipes, construction
+      materials, vinyl products, and some packaging.</p>
+      <p><strong>General guidance:</strong> PVC is generally not
+      accepted in ordinary household curbside container recycling.
+      Look for a suitable specialized program when available.</p>
+      <p><strong>Remember:</strong> Do not put PVC pipes or building
+      materials in a bin just because they carry a number.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#4</div>
+      <span class="tag">LDPE</span>
+      <h3>Low-Density Polyethylene</h3>
+      <p><strong>Common items:</strong> Squeezable bottles, some
+      lids, plastic film, and shopping or bread bags.</p>
+      <p><strong>General guidance:</strong> Some rigid LDPE products
+      may be accepted by particular programs. Plastic film and bags
+      usually require separate collection.</p>
+      <p><strong>Remember:</strong> Keep bags and loose film out of
+      curbside recycling unless specifically accepted.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#5</div>
+      <span class="tag">PP</span>
+      <h3>Polypropylene</h3>
+      <p><strong>Common items:</strong> Yogurt tubs, food containers,
+      some bottle caps, and reusable food-storage products.</p>
+      <p><strong>General guidance:</strong> Some communities accept
+      rigid polypropylene tubs and containers.</p>
+      <p><strong>Remember:</strong> Acceptance depends on the exact
+      item and local program, not the number alone.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#6</div>
+      <span class="tag">PS</span>
+      <h3>Polystyrene</h3>
+      <p><strong>Common items:</strong> Foam cups, foam packaging,
+      protective packing pieces, and some rigid disposable products.</p>
+      <p><strong>General guidance:</strong> Many curbside programs
+      do not accept foam polystyrene. A specialized drop-off option
+      may exist in some areas.</p>
+      <p><strong>Remember:</strong> Check before placing foam
+      packaging or disposable cups in the recycling bin.</p>
+    </article>
+
+    <article class="card">
+      <div class="plastic-code">#7</div>
+      <span class="tag">Other / Mixed</span>
+      <h3>Other Plastics</h3>
+      <p><strong>Common items:</strong> Certain reusable bottles,
+      multi-layer packaging, specialty plastics, and products made
+      from more than one type of resin.</p>
+      <p><strong>General guidance:</strong> This category covers
+      plastics that do not fit neatly into codes #1–#6. Recycling
+      options vary widely.</p>
+      <p><strong>Remember:</strong> Check the product and local
+      acceptance rules instead of assuming it is recyclable.</p>
+    </article>
+  </div>
+
+  <h2>What do the plastic numbers mean?</h2>
+
+  <div class="card">
+    <p><strong>They identify the resin.</strong> The codes help
+    distinguish common plastic types, such as PET, HDPE, and PP.</p>
+    <p><strong>They do not guarantee recycling.</strong> A facility
+    must have the equipment and market to recover a particular item.</p>
+    <p><strong>They do not indicate safety.</strong> A resin code
+    alone is not a complete statement about whether an item is safe
+    for a particular use.</p>
+    <p><strong>They do not replace local rules.</strong> The same
+    type of plastic can be accepted in one program and rejected
+    in another.</p>
+  </div>
+
+  <h2>How to sort plastic correctly</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div>
+        <h3>Find the code</h3>
+        <p>Look for the number on the container or its packaging.
+        If there is no number, do not guess the resin type.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div>
+        <h3>Identify the actual item</h3>
+        <p>A bottle, foam cup, plastic bag, and plastic toy can
+        require different handling even when their material codes
+        are related.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div>
+        <h3>Check the local program</h3>
+        <p>Confirm that the exact item is accepted curbside or at
+        a designated drop-off location.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div>
+        <h3>Prepare it as instructed</h3>
+        <p>Empty the container and follow directions about lids,
+        rinsing, labels, and other components.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="good">
+    <strong>Best rule of thumb:</strong> Identify the plastic,
+    identify the item, and then check the local recycling rules.
+    Never rely on the number alone.
+  </div>
+
+  <button class="button" data-go="local">Find Michigan County Rules</button>
+</section>
+
+<!-- MICHIGAN COUNTY RULES -->
+<section class="page" id="local">
+  <div class="eyebrow">Your county, your recycling information</div>
+  <h2>Michigan County Recycling Rules</h2>
+
+  <p class="section-intro">
+    Select your Michigan county to find relevant recycling-rule
+    searches and official resources. Different communities within
+    a county may use different recycling providers, so the county
+    is a starting point for finding the correct local guidance.
+  </p>
+
+  <div class="notice">
+    <strong>How this lookup works:</strong> It generates links to
+    county-specific searches and statewide recycling resources.
+    The search results are not themselves a verified regulation
+    guide. Check the source and confirm that its rules apply to
+    your local recycling service.
+  </div>
+
+  <div class="card">
+    <h3>Find your county's recycling rules</h3>
+
+    <label for="county">Select your Michigan county</label>
+    <select id="county" required>
+      <option value="">Choose a county...</option>
+      <option>Alcona</option>
+      <option>Alger</option>
+      <option>Allegan</option>
+      <option>Alpena</option>
+      <option>Antrim</option>
+      <option>Arenac</option>
+      <option>Baraga</option>
+      <option>Barry</option>
+      <option>Bay</option>
+      <option>Benzie</option>
+      <option>Berrien</option>
+      <option>Branch</option>
+      <option>Calhoun</option>
+      <option>Cass</option>
+      <option>Charlevoix</option>
+      <option>Cheboygan</option>
+      <option>Chippewa</option>
+      <option>Clare</option>
+      <option>Clinton</option>
+      <option>Crawford</option>
+      <option>Delta</option>
+      <option>Dickinson</option>
+      <option>Eaton</option>
+      <option>Emmet</option>
+      <option>Genesee</option>
+      <option>Gladwin</option>
+      <option>Gogebic</option>
+      <option>Grand Traverse</option>
+      <option>Gratiot</option>
+      <option>Hillsdale</option>
+      <option>Houghton</option>
+      <option>Huron</option>
+      <option>Ingham</option>
+      <option>Ionia</option>
+      <option>Iosco</option>
+      <option>Iron</option>
+      <option>Isabella</option>
+      <option>Jackson</option>
+      <option>Kalamazoo</option>
+      <option>Kalkaska</option>
+      <option>Kent</option>
+      <option>Keweenaw</option>
+      <option>Lake</option>
+      <option>Lapeer</option>
+      <option>Leelanau</option>
+      <option>Lenawee</option>
+      <option>Livingston</option>
+      <option>Luce</option>
+      <option>Mackinac</option>
+      <option>Macomb</option>
+      <option>Manistee</option>
+      <option>Marquette</option>
+      <option>Mason</option>
+      <option>Mecosta</option>
+      <option>Menominee</option>
+      <option>Midland</option>
+      <option>Missaukee</option>
+      <option>Monroe</option>
+      <option>Montcalm</option>
+      <option>Montmorency</option>
+      <option>Muskegon</option>
+      <option>Newaygo</option>
+      <option>Oakland</option>
+      <option>Oceana</option>
+      <option>Ogemaw</option>
+      <option>Ontonagon</option>
+      <option>Osceola</option>
+      <option>Oscoda</option>
+      <option>Otsego</option>
+      <option>Ottawa</option>
+      <option>Presque Isle</option>
+      <option>Roscommon</option>
+      <option>Saginaw</option>
+      <option>St. Clair</option>
+      <option>St. Joseph</option>
+      <option>Sanilac</option>
+      <option>Schoolcraft</option>
+      <option>Shiawassee</option>
+      <option>Tuscola</option>
+      <option>Van Buren</option>
+      <option>Washtenaw</option>
+      <option>Wayne</option>
+      <option>Wexford</option>
+    </select>
+
+    <button class="button" id="find-rules">Find County Rules</button>
+
+    <div id="lookup-result" aria-live="polite"></div>
+  </div>
+
+  <h2>Official Michigan recycling resources</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Michigan Recycling Directory</h3>
+      <p>
+        Find organizations that accept specific materials, including
+        electronics, batteries, and other items that may need
+        specialized collection.
+      </p>
+      <a class="button"
+         href="https://www.michigan.gov/egle/about/organization/materials-management/recycling/michigan-recycling-directory"
+         target="_blank" rel="noopener noreferrer">
+        Open Directory
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Recycling Raccoons: Local Rules</h3>
+      <p>
+        Explore local recycling information and links to community
+        rules. Verify that the information matches your service.
+      </p>
+      <a class="button"
+         href="https://recyclingraccoons.org/localrules/"
+         target="_blank" rel="noopener noreferrer">
+        Explore Local Rules
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Michigan EGLE Resident Guide</h3>
+      <p>
+        Review general guidance from the Michigan Department of
+        Environment, Great Lakes, and Energy.
+      </p>
+      <a class="button"
+         href="https://www.michigan.gov/egle/about/organization/materials-management/recycling/residents"
+         target="_blank" rel="noopener noreferrer">
+        Read Resident Guide
+      </a>
+    </article>
+  </div>
+
+  <div class="good">
+    <strong>Before putting something in your bin:</strong> Confirm
+    the accepted materials, preparation requirements, collection
+    schedule, and any special drop-off instructions with your
+    local recycling provider.
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="page" id="quiz">
+  <div class="eyebrow">Practice makes progress</div>
+  <h2>The SortSmart Recycling Quiz</h2>
+  <p class="section-intro">
+    Test your ability to sort everyday materials and recognize
+    common recycling mistakes. Choose one answer for each question.
+    You will receive feedback after every answer.
+  </p>
+
+  <div class="good">
+    <strong>Quiz tip:</strong> Think about the material, contamination,
+    and whether the item needs a special collection program.
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div id="quiz-result" aria-live="polite">
+    <h2 id="score-heading">Your Results</h2>
+    <p id="score-text"></p>
+    <button class="button" id="retry-quiz">Try Again</button>
+    <button class="button secondary" data-go="waste">Review Waste Guide</button>
+  </div>
+</section>
+<!-- MICHIGAN COUNTY RECYCLING CHALLENGE -->
+<section class="page" id="challenge">
+<div class="eyebrow">Every pound makes a difference</div>
+<h2>Michigan County Recycling Challenge</h2>
+<p class="section-intro">
+Record the pounds of material recycled in your Michigan county.
+See how counties compare and track the statewide total.
+</p>
+
+<div class="grid">
+<article class="card">
+<h3>Michigan Total</h3>
+<p><strong><span id="statewide-total">0</span> lbs</strong></p>
+<p class="small">All-time reported recycling</p>
+</article>
+<article class="card">
+<h3>Paper</h3>
+<p><strong><span id="paper-total">0</span> lbs</strong></p>
+</article>
+<article class="card">
+<h3>Plastic</h3>
+<p><strong><span id="plastic-total">0</span> lbs</strong></p>
+</article>
+<article class="card">
+<h3>Metal</h3>
+<p><strong><span id="metal-total">0</span> lbs</strong></p>
+</article>
+</div>
+
+<div class="card">
+<h3>Record recycled material</h3>
+<p>Enter a recycling amount in whole pounds.</p>
+
+<form id="challenge-form">
+<label for="challenge-county">Michigan county</label>
+<select id="challenge-county" required>
+<option value="">Choose a county...</option>
+</select>
+
+<label for="challenge-material">Material</label>
+<select id="challenge-material" required>
+<option value="Paper">Paper</option>
+<option value="Plastic">Plastic</option>
+<option value="Metal">Metal</option>
+</select>
+
+<label for="challenge-preset">Amount in pounds</label>
+<select id="challenge-preset" required>
+<option value="1">1 pound</option>
+<option value="5">5 pounds</option>
+<option value="10">10 pounds</option>
+<option value="25">25 pounds</option>
+<option value="50">50 pounds</option>
+<option value="custom">Enter a custom amount</option>
+</select>
+
+<div id="custom-pounds-wrap" hidden>
+<label for="challenge-custom-pounds">Custom pounds</label>
+<input
+id="challenge-custom-pounds"
+type="number"
+min="1"
+step="1"
+inputmode="numeric"
+placeholder="Enter whole pounds"
+>
+</div>
+
+<button class="button" id="challenge-submit" type="submit">
+Submit Recycling
+</button>
+</form>
+
+<p id="challenge-status" class="small" aria-live="polite"></p>
+</div>
+
+<div class="card">
+<h3>All-Time County Leaderboard</h3>
+<p class="small">
+Counties are ranked by their total reported pounds.
+The totals include all submissions recorded in the database.
+</p>
+
+<div style="overflow-x:auto">
+<table id="challenge-leaderboard"
+style="width:100%;border-collapse:collapse;text-align:left">
+<thead>
+<tr>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">Rank</th>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">County</th>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">Paper</th>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">Plastic</th>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">Metal</th>
+<th style="padding:10px;border-bottom:2px solid #d5e5d8">Total (lbs)</th>
+</tr>
+</thead>
+<tbody id="challenge-leaderboard-body">
+<tr><td colspan="6" style="padding:10px">Loading leaderboard...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="brand">♻ Sort<span>Smart</span></div>
+  <p>Learn the rules. Sort with confidence. Waste less.</p>
+  <p class="small">
+    SortSmart is an educational project, not a waste collection
+    provider. Acceptance and disposal instructions can change.
+    Confirm local requirements before disposing of an item.
+  </p>
+  <p class="small">
+    Educational references:
+    <a href="https://www.michigan.gov/egle/about/organization/materials-management/recycling/residents"
+       target="_blank" rel="noopener noreferrer">Michigan EGLE</a> ·
+    <a href="https://recyclingraccoons.org/localrules/"
+       target="_blank" rel="noopener noreferrer">Recycling Raccoons</a>
+  </p>
+</footer>
+<!-- Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://vylcrevzqoriwujwbmpc.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-xzcVikM9NPPgmUkajAvlQ_p45xnC1k";
+
+const supabaseClient = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+const countyLinks = new Map();
+
+countyLinks.set("Alcona","https://www.alconacountyfair.com/wp-content/uploads/2018/06/2011-FLYER-2.pdf");
+countyLinks.set("Alger","https://algercd.com/community-programs");
+countyLinks.set("Allegan","https://www.allegancounty.org/health/resource-recovery-and-recycling-program");
+countyLinks.set("Alpena","https://www.alpenarecycling.org/");
+countyLinks.set("Antrim","https://www.antrimcountymi.gov/departments___services_/recycling/index.php");
+countyLinks.set("Arenac","https://arenacconservationdistrict.com/recycling");
+countyLinks.set("Baraga","https://www.republicservices.com/locations/michigan/baraga-trash-pickup-and-recycling");
+countyLinks.set("Barry","https://www.barrycd.org/recycling/where-can-i-recycle-items");
+countyLinks.set("Bay","https://www.baycitymi.gov/195/Recycling");
+countyLinks.set("Benzie","https://www.benzieco.gov/government/refuse___recycling.php");
+countyLinks.set("Berrien","https://www.berriencounty.org/462/Recycling-Services");
+countyLinks.set("Branch","https://www.republicservices.com/locations/michigan/branch-trash-pickup-and-recycling");
+countyLinks.set("Calhoun","https://www.calhouncountymi.gov/departments/recycling_and_solid_waste/recycling_guide.php");
+countyLinks.set("Cass","https://www.cassopolis-mi.us/services/trash_and_recycling.php");
+countyLinks.set("Charlevoix","https://www.charlevoixcounty.org/recycling/");
+countyLinks.set("Cheboygan","https://www.cheboygancounty.net/departments-services/recycling");
+countyLinks.set("Chippewa","https://www.michigan.gov/egle/-/media/Project/Websites/egle/Documents/Programs/MMD/Materials-Management-Michigan/County-Profiles/Chippewa-County-Sept-2023.pdf?rev=ed9b2876fa9642e4858716690a0dfc33&hash=947199EBE9E5C31C2F20D23D2C85ED90");
+countyLinks.set("Clare","https://cityofclare.gov/water-sewer-waste-recycling/");
+countyLinks.set("Clinton","https://www.clinton-county.org/347/Recycling-Services");
+countyLinks.set("Crawford","https://crawfordco.org/community-resources/recycle-information/");
+countyLinks.set("Delta","https://deltacountymi.gov/delta-solid-waste-management-authority/dswma-recycling/");
+countyLinks.set("Dickinson","https://gflenv.com/dickinson-processing-facility/");
+countyLinks.set("Eaton","https://www.eatoncounty.org/913/Recycling-Events");
+countyLinks.set("Emmet","https://emmetrecycling.org/");
+countyLinks.set("Genesee","https://recyclingraccoons.org/localrules/geneseecounty/");
+countyLinks.set("Gladwin","https://www.gladwin.org/community/trash___recycling/index.php");
+countyLinks.set("Gogebic","https://www.michigan.gov/egle/-/media/Project/Websites/egle/Documents/Programs/MMD/Materials-Management-Michigan/County-Profiles/Gogebic-Sept-2023.pdf?rev=20ffbe852166460ab30cfbbdffc9d1a5&hash=F967F22F074A50D6742B3AA21679BE81");
+countyLinks.set("Grand Traverse","https://www.gtcountymi.gov/895/Recycling-Services");
+countyLinks.set("Gratiot","https://www.fortgratiot.us/services/trash-recycling-yard-waste/");
+countyLinks.set("Hillsdale","https://hillsdalecounty.gov/index.php/tm-law-enforcement/materials-management-planning");
+countyLinks.set("Houghton","https://www.cityofhoughton.com/utilities-trash-recycling/");
+countyLinks.set("Huron","https://www.porthuron.org/government/departments/public_works/programs/refuse_collection.php");
+countyLinks.set("Ingham","https://health.ingham.org/health/environmental_health/recycling.php");
+countyLinks.set("Ionia","https://cityofionia.org/215/Trash-Recycle-Seasonal-Waste-Disposal");
+countyLinks.set("Iosco","https://iosco.net/recycleforiosco/recycling-guidelines/");
+countyLinks.set("Iron","https://ironcountyut.gov/solid-waste");
+countyLinks.set("Isabella","https://www.isabellacounty.org/departments/recycling-center/resources/acceptable-materials/");
+countyLinks.set("Jackson","https://static1.squarespace.com/static/6351acde09e25c6de97a9b2d/t/668d5e8d0801934cd78cb067/1720540818491/Jackson+County+Recycling+Guide.pdf");
+countyLinks.set("Kalamazoo","https://www.kalamazoocity.org/Residents/Recycling-Waste/Recycling");
+countyLinks.set("Kalkaska","https://www.kalkaskacounty.net/departments/recycling/index.php");
+countyLinks.set("Kent","https://www.kentcountymi.gov/382/Residential-Recycling");
+countyLinks.set("Keweenaw","https://www.wm.com/us/en/recycle-right");
+countyLinks.set("Lake","https://www.laketownship.net/community/trash-recycling/");
+countyLinks.set("Lapeer","https://lapeercountyrecycling.org/");
+countyLinks.set("Leelanau","https://www.leelanau.gov/leelanau_county/boards_commissions_and_committees/recycling.php");
+countyLinks.set("Lenawee","https://www.lenawee.mi.us/280/Recycling---Lenawee-Drop-Off-Site");
+countyLinks.set("Livingston","https://www.recyclelivingston.org/information");
+countyLinks.set("Luce","https://community.recyclingpartnership.org/map/place/26095");
+countyLinks.set("Mackinac","https://www.cityofmi.org/department-public-works/page/recycling");
+countyLinks.set("Macomb","https://www.macomb-mi.gov/257/Trash-Services");
+countyLinks.set("Manistee","https://www.manisteecountymi.gov/362/Recycling-By-Community");
+countyLinks.set("Marquette","https://marquettemi.gov/public-works/garbage-recycling-compost-rubbish/");
+countyLinks.set("Mason","https://www.mason.mi.us/how_do_i_/learn_about/waste_removal_.php");
+countyLinks.set("Mecosta","https://mecostarecycles.org/");
+countyLinks.set("Menominee","https://www.menominee.us/media/2721");
+countyLinks.set("Midland","https://cityofmidlandmi.gov/DocumentCenter/View/23817/Midland-Educational-Brochure");
+countyLinks.set("Missaukee","https://www.missaukee.org/departments/recycling/index.php");
+countyLinks.set("Monroe","https://www.co.monroe.mi.us/533/Recycling-Materials-Management");
+countyLinks.set("Montcalm","https://www.montcalm.us/310/Recycling-in-Montcalm-County");
+countyLinks.set("Montmorency","https://www.michigan.gov/egle/public/learn/recycling");
+countyLinks.set("Muskegon","https://muskegon-mi.gov/city-services/public-works/sanitation/recycling-program/");
+countyLinks.set("Newaygo","https://www.newaygocountymi.gov/departments/drain-commission/recycling/");
+countyLinks.set("Oakland","https://oaklandtwpmi.gov/waste-recycling/");
+countyLinks.set("Oceana","https://oceana.mi.us/departments/transfer-station-recycling-center/");
+countyLinks.set("Ogemaw","https://www.michigan.gov/egle/-/media/Project/Websites/egle/Documents/Programs/MMD/Materials-Management-Michigan/County-Profiles/Ogemaw-County-Profile.pdf?rev=ea0f2857e33b464cb863721c13b3c73a&hash=9894FD0AD800A69116A1D3039DAE011A");
+countyLinks.set("Ontonagon","https://www.oasd.k12.mi.us/recycling/");
+countyLinks.set("Osceola","https://www.osceola.org/My-Property/Waste-and-Recycling");
+countyLinks.set("Oscoda","https://iosco.net/recycleforiosco/recycling-guidelines/");
+countyLinks.set("Otsego","https://www.otsegocountymi.gov/212/Recycling-Information");
+countyLinks.set("Ottawa","https://miottawa.org/health/es/recycling/");
+countyLinks.set("Presque Isle","https://presqueisletwp.org/recycling/");
+countyLinks.set("Roscommon","https://roscommontownshipmi.gov/trash-talk/");
+countyLinks.set("Saginaw","https://www.recyclemotion.org/");
+countyLinks.set("St. Clair","https://cityofstclairmi.gov/waste-recycling/");
+countyLinks.set("St. Joseph","https://www.sjcity.com/785/Waste-Recycling");
+countyLinks.set("Sanilac","https://www.sanilaccounty.gov/community/services/recycle_center/how_to_recycle.php");
+countyLinks.set("Schoolcraft","https://www.republicservices.com/locations/michigan/schoolcraft-trash-pickup-and-recycling");
+countyLinks.set("Shiawassee","https://www.shiawasseerecycles.com/");
+countyLinks.set("Tuscola","https://www.tuscolacounty.org/recycling/doc/Recycle Pamphlet 2021.pdf");
+countyLinks.set("Van Buren","https://vbtmi.gov/departments/municipal_services/recycling.php");
+countyLinks.set("Washtenaw","https://wwrarecycles.org/what-can-i-recycle/");
+countyLinks.set("Wayne","https://www.cityofwayne.com/236/Services");
+countyLinks.set("Wexford","https://www.wm.com/us/en/recycle-right");
+
+//get Url
+function getCountyUrl(county)
+{  
+    return countyLinks.get(county);
+}
+// NAVIGATION
+function showPage(pageId) {
+  const target = document.getElementById(pageId);
+  if (!target) return;
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === pageId);
+  });
+
+  document.querySelectorAll("nav button[data-page]").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === pageId);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("nav button[data-page]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
+});
+
+document.querySelectorAll("[data-go]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.go));
+});
+
+
+// COUNTY-ONLY RECYCLING LOOKUP
+const countySelect = document.getElementById("county");
+const lookupResult = document.getElementById("lookup-result");
+
+function addResourceLink(container, title, description, url) {
+  const link = document.createElement("a");
+  link.className = "resource-link";
+  link.href = url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+
+  const details = document.createElement("span");
+  details.textContent = description;
+
+  link.append(heading, details);
+  container.appendChild(link);
+}
+
+document.getElementById("find-rules").addEventListener("click", () => {
+  const county = countySelect.value;
+  console.log("lavi","test",county, typeof(county));
+  if (!county) {
+    lookupResult.replaceChildren();
+
+    const message = document.createElement("p");
+    message.className = "notice";
+    message.textContent = "Please select a Michigan county first.";
+
+    lookupResult.appendChild(message);
+    countySelect.focus();
+    return;
+  }
+
+  lookupResult.replaceChildren();
+
+  const heading = document.createElement("h3");
+  heading.textContent = county + " County Recycling Resources";
+  lookupResult.appendChild(heading);
+
+  const intro = document.createElement("p");
+  intro.textContent =
+    "Use the links below to find recycling guidelines relevant to " +
+    county + " County, Michigan. Open the results and confirm that " +
+    "the instructions apply to your local service.";
+  lookupResult.appendChild(intro);
+
+  const countyQuery =  getCountyUrl(county);
+  console.log("lavi",countyQuery);
+
+
+  const officialQuery = encodeURIComponent(
+    "site:" + county.toLowerCase().replace(/\s+/g, "") +
+    ".org recycling Michigan " + county + " County"
+  );
+
+  const governmentQuery = encodeURIComponent(
+    county + " County Michigan recycling official government website"
+  );
+
+  const localRulesQuery = encodeURIComponent(
+    county + " County Michigan recycling site:recyclingraccoons.org/localrules"
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Search " + county + " County Recycling Rules",
+    "Find county recycling guides, accepted materials, and collection information.",
+    countyQuery
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Search County Government Resources",
+    "Look for county government pages and official waste or recycling information.",
+    "https://www.google.com/search?q=" + governmentQuery
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Search Local Rules on Recycling Raccoons",
+    "Look for community recycling instructions associated with this county.",
+    "https://www.google.com/search?q=" + localRulesQuery
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Search Potential County Website Resources",
+    "An additional search for county-related websites. Verify the domain and source before relying on its guidance.",
+    "https://www.google.com/search?q=" + officialQuery
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Michigan Recycling Directory",
+    "Search for facilities and organizations that accept specific materials.",
+    "https://www.michigan.gov/egle/about/organization/materials-management/recycling/michigan-recycling-directory"
+  );
+
+  addResourceLink(
+    lookupResult,
+    "Michigan EGLE Resident Guide",
+    "Read statewide educational guidance and use it alongside local rules.",
+    "https://www.michigan.gov/egle/about/organization/materials-management/recycling/residents"
+  );
+
+  const note = document.createElement("p");
+  note.className = "small";
+  note.textContent =
+    "Important: These are county-specific search links, not a verified " +
+    "database of county regulations. Some counties do not publish a " +
+    "single countywide guide. Your city, township, recycling authority, " +
+    "or waste provider may determine which items are accepted.";
+  lookupResult.appendChild(note);
+});
+
+
+// RECYCLING QUIZ
+const questions = [
+  {
+    question: "What should you do before recycling a food container?",
+    options: [
+      "Check local rules and remove leftover food",
+      "Put it in the bin without checking",
+      "Fill it with water and leave it full",
+      "Wrap it in a plastic shopping bag"
+    ],
+    answer: 0,
+    explanation:
+      "Checking acceptance rules and removing leftover food helps reduce contamination."
+  },
+  {
+    question: "What does a number inside the plastic chasing-arrows symbol identify?",
+    options: [
+      "How many times the item has been recycled",
+      "The plastic resin type",
+      "A guarantee of curbside acceptance",
+      "The item's exact environmental impact"
+    ],
+    answer: 1,
+    explanation:
+      "The code identifies the resin type. It does not guarantee that your local program accepts the item."
+  },
+  {
+    question: "How should you generally dispose of a household battery?",
+    options: [
+      "Put it loose in any curbside recycling bin",
+      "Place it inside a food carton",
+      "Check designated battery collection instructions",
+      "Put it in a compost container"
+    ],
+    answer: 2,
+    explanation:
+      "Batteries can pose fire or chemical risks. Follow appropriate collection and handling instructions."
+  },
+  {
+    question: "Which item may need specialized collection?",
+    options: [
+      "A newspaper accepted by your program",
+      "An empty can accepted by your program",
+      "A clean cardboard box accepted by your program",
+      "An old electronic device"
+    ],
+    answer: 3,
+    explanation:
+      "Electronics often need specialized processing. Look for an electronics recycler or take-back program."
+  },
+  {
+    question: "Why should you check local recycling rules?",
+    options: [
+      "Every community accepts exactly the same items",
+      "Accepted materials and preparation rules can vary",
+      "Recycling symbols replace local guidelines",
+      "Anything made of plastic is always recyclable curbside"
+    ],
+    answer: 1,
+    explanation:
+      "Programs differ in equipment and accepted materials. Local instructions are the best source for bin rules."
+  },
+  {
+    question: "What does plastic code #1 identify?",
+    options: [
+      "PET or PETE plastic",
+      "PVC plastic",
+      "Polystyrene",
+      "All types of plastic"
+    ],
+    answer: 0,
+    explanation:
+      "Code #1 identifies PET or PETE, commonly used for beverage bottles. Acceptance still depends on the local program."
+  },
+  {
+    question: "What is a sensible first step for unwanted wearable clothing?",
+    options: [
+      "Consider donation or reuse",
+      "Put it in the glass bin",
+      "Mix it with food scraps",
+      "Assume every curbside program accepts textiles"
+    ],
+    answer: 0,
+    explanation:
+      "Donation or reuse may extend an item's useful life. Check the receiving organization's requirements."
+  },
+  {
+    question: "What should you do if you are unsure how to dispose of a household chemical?",
+    options: [
+      "Pour it down a storm drain",
+      "Mix it with another chemical",
+      "Check its label and contact a proper local program",
+      "Put it in the paper recycling bin"
+    ],
+    answer: 2,
+    explanation:
+      "Some household products need special handling. Never mix unknown chemicals or pour them into drains."
+  },
+  {
+    question: "What is a major purpose of recycling?",
+    options: [
+      "Guarantee that no waste goes to a landfill",
+      "Make all disposable products harmless",
+      "Ensure every material is recyclable everywhere",
+      "Recover materials for use in making new products"
+    ],
+    answer: 3,
+    explanation:
+      "Recycling can recover useful materials for manufacturing, depending on sorting, processing, and available markets."
+  }
+];
+
+let score = 0;
+let answered = 0;
+
+function renderQuiz() {
+  const container = document.getElementById("quiz-container");
+  container.replaceChildren();
+
+  score = 0;
+  answered = 0;
+
+  document.getElementById("quiz-result").style.display = "none";
+
+  questions.forEach((item, questionIndex) => {
+    const card = document.createElement("article");
+    card.className = "quiz-question";
+
+    const heading = document.createElement("h3");
+    heading.textContent =
+      "Question " + (questionIndex + 1) + " of " +
+      questions.length + ": " + item.question;
+
+    card.appendChild(heading);
+
+    const optionsContainer = document.createElement("div");
+
+    item.options.forEach((option, optionIndex) => {
+      const button = document.createElement("button");
+      button.className = "quiz-option";
+      button.textContent =
+        String.fromCharCode(65 + optionIndex) + ". " + option;
+
+      button.addEventListener("click", () => {
+        if (card.dataset.answered === "true") return;
+
+        card.dataset.answered = "true";
+        answered++;
+
+        const allButtons = optionsContainer.querySelectorAll("button");
+
+        allButtons.forEach((choice, index) => {
+          choice.disabled = true;
+
+          if (index === item.answer) {
+            choice.classList.add("correct");
+          }
+        });
+
+        const feedback = document.createElement("p");
+        feedback.className = "feedback";
+
+        if (optionIndex === item.answer) {
+          score++;
+          feedback.textContent = "Correct! " + item.explanation;
+        } else {
+          button.classList.add("incorrect");
+          feedback.textContent = "Not quite. " + item.explanation;
+        }
+
+        card.appendChild(feedback);
+
+        if (answered === questions.length) {
+          showResults();
+        }
+      });
+
+      optionsContainer.appendChild(button);
+    });
+
+    card.appendChild(optionsContainer);
+    container.appendChild(card);
+  });
+}
+
+function showResults() {
+  const result = document.getElementById("quiz-result");
+  const heading = document.getElementById("score-heading");
+  const text = document.getElementById("score-text");
+  const percentage = Math.round((score / questions.length) * 100);
+
+  heading.textContent =
+    "You scored " + score + " out of " + questions.length;
+
+  if (percentage === 100) {
+    text.textContent =
+      "Excellent work! You answered every question correctly. " +
+      "Keep checking local rules as programs can differ.";
+  } else if (percentage >= 75) {
+    text.textContent =
+      "Nice work! Review any missed questions to strengthen your knowledge.";
+  } else if (percentage >= 50) {
+    text.textContent =
+      "You're making progress. Visit the Waste Guide and try again.";
+  } else {
+    text.textContent =
+      "This is a learning opportunity. Explore the Waste Guide, then retry the quiz.";
+  }
+
+  text.textContent += " Final score: " + percentage + "%.";
+  result.style.display = "block";
+  result.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+document.getElementById("retry-quiz").addEventListener("click", () => {
+  renderQuiz();
+  document.getElementById("quiz").scrollIntoView({
+    behavior: "smooth"
+  });
+});
+
+renderQuiz();
+/* MICHIGAN COUNTY RECYCLING CHALLENGE */
+
+const challengeCounty = document.getElementById("challenge-county");
+const challengeForm = document.getElementById("challenge-form");
+const challengePreset = document.getElementById("challenge-preset");
+const customPoundsWrap = document.getElementById("custom-pounds-wrap");
+const customPoundsInput = document.getElementById("challenge-custom-pounds");
+const challengeStatus = document.getElementById("challenge-status");
+const challengeSubmit = document.getElementById("challenge-submit");
+const leaderboardBody = document.getElementById("challenge-leaderboard-body");
+
+const challengeMaterialNames = ["Paper", "Plastic", "Metal"];
+
+// Reuse the 83 county options already in your existing county selector.
+challengeCounty.innerHTML = '<option value="">Choose a county...</option>';
+
+Array.from(countySelect.options).forEach(option => {
+if (option.value !== "") {
+challengeCounty.add(new Option(option.text, option.value));
+}
+});
+
+challengePreset.addEventListener("change", () => {
+const isCustom = challengePreset.value === "custom";
+customPoundsWrap.hidden = !isCustom;
+customPoundsInput.required = isCustom;
+
+if (!isCustom) customPoundsInput.value = "";
+});
+
+function formatPounds(value) {
+return Number(value).toLocaleString("en-US");
+}
+
+async function loadChallengeLeaderboard() {
+leaderboardBody.replaceChildren();
+
+try {
+const submissions = [];
+const pageSize = 1000;
+let start = 0;
+
+// Fetch in batches so totals aren't limited to the first 1,000 rows.
+while (true) {
+const { data, error } = await supabaseClient
+.from("recycling_submissions")
+.select("county, material, pounds")
+.range(start, start + pageSize - 1);
+
+if (error) throw error;
+
+submissions.push(...data);
+
+if (data.length < pageSize) break;
+start += pageSize;
+}
+
+const totals = new Map();
+
+Array.from(challengeCounty.options).forEach(option => {
+if (!option.value) return;
+
+totals.set(option.value, {
+Paper: 0,
+Plastic: 0,
+Metal: 0,
+total: 0
+});
+});
+
+let statewide = 0;
+const statewideMaterials = { Paper: 0, Plastic: 0, Metal: 0 };
+
+submissions.forEach(entry => {
+// Ignore unexpected values rather than counting them.
+if (
+!totals.has(entry.county) ||
+!challengeMaterialNames.includes(entry.material) ||
+!Number.isInteger(entry.pounds) ||
+entry.pounds <= 0
+) return;
+
+const countyTotals = totals.get(entry.county);
+countyTotals[entry.material] += entry.pounds;
+countyTotals.total += entry.pounds;
+
+statewide += entry.pounds;
+statewideMaterials[entry.material] += entry.pounds;
+});
+
+document.getElementById("statewide-total").textContent =
+formatPounds(statewide);
+document.getElementById("paper-total").textContent =
+formatPounds(statewideMaterials.Paper);
+document.getElementById("plastic-total").textContent =
+formatPounds(statewideMaterials.Plastic);
+document.getElementById("metal-total").textContent =
+formatPounds(statewideMaterials.Metal);
+
+const rankedCounties = Array.from(totals.entries())
+.map(([county, values]) => ({ county, ...values }))
+.sort((a, b) => b.total - a.total || a.county.localeCompare(b.county));
+
+rankedCounties.forEach((entry, index) => {
+const row = document.createElement("tr");
+
+[
+index + 1,
+entry.county,
+formatPounds(entry.Paper),
+formatPounds(entry.Plastic),
+formatPounds(entry.Metal),
+formatPounds(entry.total)
+].forEach(value => {
+const cell = document.createElement("td");
+cell.style.padding = "10px";
+cell.style.borderBottom = "1px solid #d5e5d8";
+cell.textContent = value;
+row.appendChild(cell);
+});
+
+leaderboardBody.appendChild(row);
+});
+
+if (rankedCounties.length === 0) {
+leaderboardBody.innerHTML =
+'<tr><td colspan="6" style="padding:10px">No counties found.</td></tr>';
+}
+} catch (error) {
+console.error("Leaderboard loading error:", error);
+leaderboardBody.replaceChildren();
+
+const row = document.createElement("tr");
+const cell = document.createElement("td");
+cell.colSpan = 6;
+cell.style.padding = "10px";
+cell.textContent =
+"Could not load the leaderboard. Check your Supabase connection and database permissions.";
+row.appendChild(cell);
+leaderboardBody.appendChild(row);
+}
+}
+
+challengeForm.addEventListener("submit", async event => {
+event.preventDefault();
+
+const county = challengeCounty.value;
+const material = document.getElementById("challenge-material").value;
+
+const pounds = challengePreset.value === "custom"
+? Number(customPoundsInput.value)
+: Number(challengePreset.value);
+
+if (!county) {
+challengeStatus.textContent = "Please choose a county.";
+return;
+}
+
+if (!challengeMaterialNames.includes(material)) {
+challengeStatus.textContent = "Please choose a valid material.";
+return;
+}
+
+if (!Number.isSafeInteger(pounds) || pounds <= 0) {
+challengeStatus.textContent =
+"Please enter a whole-number amount of pounds greater than zero.";
+return;
+}
+
+challengeSubmit.disabled = true;
+challengeStatus.textContent = "Submitting your recycling record...";
+
+try {
+const { error } = await supabaseClient
+.from("recycling_submissions")
+.insert([{ county, material, pounds }]);
+
+if (error) throw error;
+
+challengeStatus.textContent =
+"Submission saved! The all-time leaderboard has been updated.";
+
+challengeForm.reset();
+customPoundsWrap.hidden = true;
+customPoundsInput.required = false;
+
+await loadChallengeLeaderboard();
+} catch (error) {
+console.error("Submission error:", error);
+challengeStatus.textContent =
+"Submission failed. Check your Supabase URL, publishable key, table columns, and insert policy.";
+} finally {
+challengeSubmit.disabled = false;
+}
+});
+
+// Load the shared totals when the page opens and when visitors visit the challenge.
+loadChallengeLeaderboard();
+
+document.querySelector('nav button[data-page="challenge"]')
+.addEventListener("click", loadChallengeLeaderboard);
+
+
+</script>
+
+</body>
+</html>
